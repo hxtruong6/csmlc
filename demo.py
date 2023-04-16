@@ -14,13 +14,15 @@ np.random.seed(1)
 x_data = np.loadtxt("scene/data.x", dtype=float)
 y_data = np.loadtxt("scene/data.y", dtype=int)
 
+# print(x_data, x_data.shape[0] / 2)
+
 # split data for training and testing
 idxs = np.arange(x_data.shape[0])
 np.random.shuffle(idxs)
-x_train = x_data[: x_data.shape[0] / 2]
-y_train = y_data[: y_data.shape[0] / 2]
-x_test = x_data[x_data.shape[0] / 2 :]
-y_test = y_data[x_data.shape[0] / 2 :]
+x_train = x_data[: x_data.shape[0] // 2]
+y_train = y_data[: y_data.shape[0] // 2]
+x_test = x_data[x_data.shape[0] // 2 :]
+y_test = y_data[x_data.shape[0] // 2 :]
 
 # algorithms (there is no inference rule for pcc_acc, using pcc_f1 instead)
 params = {"n_estimators": 500, "max_depth": 10, "max_features": "sqrt", "n_jobs": 10}
