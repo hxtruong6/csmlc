@@ -38,7 +38,9 @@ class PCC:
     def predict_one(self, x, pb):
         if self.cost == "ham":
             return (pb > 0.5).astype(int)
+        # self.n_sample is to select n_sample random samples from the distribution
         prob = np.repeat(pb, self.n_sample).reshape((pb.shape[0], self.n_sample)).T
+        print(prob.shape)
         y_sample = (np.random.random((self.n_sample, self.K)) < prob).astype(int)
         if self.cost == "rank":
             thr = 0.0
@@ -60,6 +62,7 @@ class PCC:
                     thr = p
             return (pb > thr).astype(int)
         elif self.cost == "f1":
+            # self.n_sample is the number of point of data (sample).
             s_idxs = y_sample.sum(axis=1)
             P = np.zeros((self.K, self.K))
             for i in range(self.K):
@@ -77,7 +80,31 @@ class PCC:
             for i in range(self.K):
                 H[i, idxs[i, : i + 1]] = 1
             scores = (F * H).sum(axis=1)
+            print(H.shape)
+            print(scores)
             pred = H[scores.argmax(), :]
             # if (s_idxs==0).mean() > 2*scores.max():
             # 	pred = np.zeros((self.K, ), dtype=int)
+            print(pred.shape)
+
             return pred
+        elif self.cost == "mar":
+            pb.sort(reversed=True)
+            f = np.zeros((self.K, self.K))
+            sum_pb = sum([p for p in pb])
+
+            f[self.K - 1] = 1 + (1 / self.K) * sum_pb
+            for idx in range(0, self.K - 1):
+                l = idx + 1
+                f[idx] = (
+                    1
+                    - (1 / (self.K - 1)) * sum_pb
+                    + (self.K / ((self.K - l) * l)) * sum([p for p in pb[:l]])
+                )
+
+            l_max = f.argmax()
+            return (pb > pb[l_max]).astype(int)
+        elif self.cost == "inf":
+            # f = [0] * self.K
+            # f[self.K - 1] =
+            pass
