@@ -18,11 +18,13 @@ class PCC:
             )
 
     def predict(self, x_test):
-        r_test = self.predict_prob(x_test)
-        p_test = np.zeros((x_test.shape[0], self.K), dtype=int)
+        pb_test = self.predict_prob(x_test)
+        pred_test = np.zeros((x_test.shape[0], self.K), dtype=int)
+        # shape = (n_sample, K)
+        # print(r_test.shape, p_test.shape)
         for i in range(x_test.shape[0]):
-            p_test[i, :] = self.predict_one(x_test[i, :], r_test[i, :])
-        return p_test
+            pred_test[i, :] = self.predict_one(x_test[i, :], pb_test[i, :])
+        return pred_test
 
     def predict_prob(self, x_test):
         r_test = np.zeros((x_test.shape[0], self.K))
@@ -39,9 +41,12 @@ class PCC:
         if self.cost == "ham":
             return (pb > 0.5).astype(int)
         # self.n_sample is to select n_sample random samples from the distribution
-        prob = np.repeat(pb, self.n_sample).reshape((pb.shape[0], self.n_sample)).T
-        print(prob.shape)
+        # prob = np.repeat(pb, self.n_sample).reshape((pb.shape[0], self.n_sample)).T
+        prob = pb
+        # print(prob.shape, pb.shape)
         y_sample = (np.random.random((self.n_sample, self.K)) < prob).astype(int)
+        # print(y_sample.shape, y_sample[0])
+        # TODO: why did they need to < prob ?
         if self.cost == "rank":
             thr = 0.0
             pred = (pb > thr).astype(int)
@@ -64,12 +69,14 @@ class PCC:
         elif self.cost == "f1":
             # self.n_sample is the number of point of data (sample).
             s_idxs = y_sample.sum(axis=1)
+            # print(s_idxs)
             P = np.zeros((self.K, self.K))
             for i in range(self.K):
                 P[i, :] = (
                     y_sample[s_idxs == (i + 1), :].sum(axis=0) * 1.0 / self.n_sample
                 )
-
+            # print(P.shape)
+            # print(P[0])
             W = 1.0 / (
                 np.cumsum(np.ones((self.K, self.K)), axis=1)
                 + np.cumsum(np.ones((self.K, self.K)), axis=0)
@@ -80,12 +87,12 @@ class PCC:
             for i in range(self.K):
                 H[i, idxs[i, : i + 1]] = 1
             scores = (F * H).sum(axis=1)
-            print(H.shape)
-            print(scores)
+            # print(H.shape)
+            # print(scores)
             pred = H[scores.argmax(), :]
             # if (s_idxs==0).mean() > 2*scores.max():
             # 	pred = np.zeros((self.K, ), dtype=int)
-            print(pred.shape)
+            # print(pred.shape)
 
             return pred
         elif self.cost == "mar":
