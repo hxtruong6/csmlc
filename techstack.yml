@@ -1,7 +1,8 @@
 repo_name: hxtruong6/csmlc
 report_id: 7ed1d80f2d98fcb19d8840288434db15
+version: 0.1
 repo_type: Public
-timestamp: '2023-11-14T05:18:00+00:00'
+timestamp: '2024-01-05T08:45:31+00:00'
 requested_by: hxtruong6
 provider: github
 branch: master
@@ -16,6 +17,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Templating Languages & Extensions
   image_url: https://img.stackshare.io/service/2303/New_Project__20_.png
+  detection_source_url: https://github.com/hxtruong6/csmlc/blob/master/requirements.txt
   detection_source: requirements.txt
   last_updated_by: hxtruong6
   last_updated_on: 2023-04-27 08:33:40.000000000 Z
@@ -28,6 +30,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/993/pUBY5pVj.png
+  detection_source_url: https://github.com/hxtruong6/csmlc
   detection_source: Repo Metadata
 - name: Git
   description: Fast, scalable, distributed revision control system
@@ -37,6 +40,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Version Control System
   image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/hxtruong6/csmlc
   detection_source: Repo Metadata
 - name: Pillow
   description: Python Imaging Library
@@ -46,6 +50,7 @@ tools:
   category: Assets and Media
   sub_category: Image Processing and Management
   image_url: https://img.stackshare.io/service/2375/default_1f67b0ca7416a9f52beb655f90b5602d5ef74b75.jpg
+  detection_source_url: https://github.com/hxtruong6/csmlc/blob/master/requirements.txt
   detection_source: requirements.txt
   last_updated_by: hxtruong6
   last_updated_on: 2023-04-27 08:33:40.000000000 Z
@@ -59,7 +64,7 @@ tools:
   category: Libraries
   sub_category: Data Science Tools
   image_url: https://img.stackshare.io/service/2179/default_332f874a2edb2686f578aa6389313efcea1eec41.png
-  detection_source_url: requirements.txt
+  detection_source_url: https://github.com/hxtruong6/csmlc/blob/master/requirements.txt
   detection_source: requirements.txt
   last_updated_by: hxtruong6
   last_updated_on: 2023-04-27 08:33:40.000000000 Z
@@ -73,7 +78,7 @@ tools:
   category: Libraries
   sub_category: Data Science Tools
   image_url: https://img.stackshare.io/service/3303/scipyshiny_small.png
-  detection_source_url: requirements.txt
+  detection_source_url: https://github.com/hxtruong6/csmlc/blob/master/requirements.txt
   detection_source: requirements.txt
   last_updated_by: hxtruong6
   last_updated_on: 2023-04-27 08:33:40.000000000 Z
@@ -86,6 +91,7 @@ tools:
   category: Application Utilities
   sub_category: Machine Learning Tools
   image_url: https://img.stackshare.io/service/4475/hpYQzO_U_400x400.png
+  detection_source_url: https://github.com/hxtruong6/csmlc/blob/master/requirements.txt
   detection_source: requirements.txt
   last_updated_by: hxtruong6
   last_updated_on: 2023-04-27 08:33:40.000000000 Z
